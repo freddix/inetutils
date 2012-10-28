@@ -130,6 +130,7 @@ TFTP client from GNU inetutils package.
 %patch0 -p1
 
 sed -i "/gets is a security hole/d" lib/stdio.in.h
+sed -i "/AM_C_PROTOTYPES/d" configure.ac
 
 %build
 cp -f /usr/share/gettext/config.rpath build-aux
