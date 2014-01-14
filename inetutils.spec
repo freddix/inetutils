@@ -1,12 +1,11 @@
 Summary:	Common networking utilities and servers
 Name:		inetutils
-Version:	1.9.1
-Release:	3
+Version:	1.9.2
+Release:	1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	http://ftp.gnu.org/gnu/inetutils/%{name}-%{version}.tar.gz
-# Source0-md5:	944f7196a2b3dba2d400e9088576000c
-Patch0:		%{name}-nolibs.patch
+# Source0-md5:	aa1a9a132259db83e66c1f3265065ba2
 URL:		http://www.gnu.org/software/inetutils/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -15,6 +14,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	pam-devel
 BuildRequires:	readline-devel
 BuildRequires:	texinfo
+Requires:	iana-etc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_libexecdir	%{_sbindir}
@@ -23,6 +23,17 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This is a distribution of common networking utilities and servers.
 Main package currently contains only some common documentation, all
 utilities are in their own packages.
+
+%package dnsdomainname
+Summary:	DNS domain name tool
+Group:		Applications/Networking
+Requires:	%{name} = %{version}-%{release}
+
+%description dnsdomainname
+Show domain part of the system's fully qualified host name.
+The tool uses gethostname to get the host name of the system and
+getaddrinfo to resolve it into a canonical name. The part after the
+first period ('.') of the canonical name is shown.
 
 %package ftp
 Summary:	FTP client from GNU inetutils package
@@ -127,10 +138,6 @@ TFTP client from GNU inetutils package.
 
 %prep
 %setup -q
-%patch0 -p1
-
-sed -i "/gets is a security hole/d" lib/stdio.in.h
-sed -i "/AM_C_PROTOTYPES/d" configure.ac
 
 %build
 cp -f /usr/share/gettext/config.rpath build-aux
@@ -170,6 +177,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* THANKS TODO
 %{_infodir}/inetutils.info*
+
+%files dnsdomainname
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/dnsdomainname
+%{_mandir}/man1/dnsdomainname.1*
 
 %files ftp
 %defattr(644,root,root,755)
