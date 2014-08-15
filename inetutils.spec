@@ -1,7 +1,7 @@
 Summary:	Common networking utilities and servers
 Name:		inetutils
 Version:	1.9.2
-Release:	1
+Release:	2
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	http://ftp.gnu.org/gnu/inetutils/%{name}-%{version}.tar.gz
