@@ -1,11 +1,11 @@
 Summary:	Common networking utilities and servers
 Name:		inetutils
-Version:	1.9.2
-Release:	3
+Version:	1.9.3
+Release:	1
 License:	GPL v3+
 Group:		Networking/Utilities
 Source0:	http://ftp.gnu.org/gnu/inetutils/%{name}-%{version}.tar.gz
-# Source0-md5:	aa1a9a132259db83e66c1f3265065ba2
+# Source0-md5:	491a75cb382ce3f68122e4556addfcae
 URL:		http://www.gnu.org/software/inetutils/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -145,7 +145,6 @@ cp -f /usr/share/gettext/config.rpath build-aux
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-CPPFLAGS="%{rpmcppflags} -I/usr/include/ncurses"
 %configure \
 	--disable-ifconfig	\
 	--disable-logger	\
